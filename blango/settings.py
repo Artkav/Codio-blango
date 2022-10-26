@@ -18,6 +18,49 @@ from configurations import Configuration
 from configurations import values
 
 class Dev(Configuration):
+
+    # Add LOGGING
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "filters": {
+            "require_debug_false": {
+                "()": "django.utils.log.RequireDebugFalse",
+            },
+        },
+        "formatters": {
+            "verbose": {
+                "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+                "style": "{",
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "stream": "ext://sys.stdout",
+                "formatter": "verbose",
+            },
+            "mail_admins": {
+                "level": "ERROR",
+                "class": "django.utils.log.AdminEmailHandler",
+                "filters": ["require_debug_false"],
+            },
+        },
+        "loggers": {
+            "django.request": {
+                "handlers": ["mail_admins"],
+                "level": "ERROR",
+                "propagate": True,
+            },
+        },
+        "root": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+        },
+    }
+
+    DJANGO_ADMINS="Ben Shaw,ben@example.com;Leo Lucio,leo@example.com"
+
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
     BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -146,8 +189,10 @@ class Dev(Configuration):
 
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 class Prod(Dev):
     DEBUG = False
+    BASE_DIR = Path(__file__).resolve().parent.parent
     SECRET_KEY = values.SecretValue()
     ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io"])
     DATABASES = {
