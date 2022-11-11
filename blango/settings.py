@@ -93,10 +93,12 @@ class Dev(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        "blango_auth",
         'blog',
         'crispy_forms', 
         'crispy_bootstrap5',
         "debug_toolbar",
+        
         
     ]
 
@@ -169,6 +171,10 @@ class Dev(Configuration):
             'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
         },
     ]
+
+    #Aush User Model
+
+    AUTH_USER_MODEL = "blango_auth.User"
 
 
     #Add password hashers

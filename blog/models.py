@@ -7,6 +7,10 @@ from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
 
+class AuthorProfile(models.Model):
+  user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile") 
+  bio = models.TextField()
+
 class Tag(models.Model):
   value = models.TextField(max_length=100)
 
