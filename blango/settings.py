@@ -61,6 +61,18 @@ class Dev(Configuration):
 
     DJANGO_ADMINS="Ben Shaw,ben@example.com;Leo Lucio,leo@example.com"
 
+    
+    #Add Email backend
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+    REGISTRATION_OPEN = True
+
+
+    #How much days Activation valid
+    ACCOUNT_ACTIVATION_DAYS = 7
+
+
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
     BASE_DIR = Path(__file__).resolve().parent.parent
 
