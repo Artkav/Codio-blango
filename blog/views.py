@@ -12,6 +12,13 @@ from django.views.decorators.vary import vary_on_cookie
 
 logger = logging.getLogger(__name__)
 
+def post_table(request):
+    return render(request, "blog/post-table.html")
+
+
+
+
+
 # @cache_page(300)
 # @vary_on_cookie
 def index(request):
